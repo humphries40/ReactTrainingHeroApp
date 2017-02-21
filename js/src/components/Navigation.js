@@ -3,19 +3,33 @@ import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 
 export default class Navigation extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+
+
     render() {
-        let i = Math.PI
         return <div>
-            <nav className="navbar navbar-inverse bg-inverse" >
-                <a className="navbar-brand" href="#">App</a>
-                <div className="collapse navbar-collapse">
-                    <div className="navbar-nav">
-                        <Link className="nav-item nav-link" to="/heroList">Hero List</Link>
-                        <Link className="nav-item nav-link" to="#">Link 2</Link>
+            <header>
+                <nav className="navbar navbar-inverse">
+                    <div className="container">
+                        <div className="navbar-header">
+                            <Link to="/" className="navbar-brand" activeClassName="active">App</Link>
+                        </div>
+                        <ul className="nav navbar-nav">
+                            <li><Link to="heroList">Hero List</Link></li>
+                            <li><Link to="hero">Hero</Link></li>
+                        </ul>
                     </div>
+                </nav>
+            </header>
+            <section className="container-fluid">
+                <div className="starter-template">
+                    {this.props.children}
                 </div>
-            </nav>
-        </div>;
+            </section>
+        </div>
     }
 }
 
