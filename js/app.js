@@ -16,6 +16,7 @@ const main = (
         <Route path="/" component={NavBar}>
           <Route path="heroList" component={ListContainer} />
           <Route path="hero/(:id)" component={DetailContainer} />
+          <Route path="newHero" component={DetailContainer} />
         </Route>
       </Router>
     </Provider>

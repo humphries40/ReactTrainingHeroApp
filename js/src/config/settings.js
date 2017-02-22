@@ -1,8 +1,8 @@
 const URI = 'https://ce3rt0e0yl.execute-api.us-east-1.amazonaws.com/prod/abbHeros',
   EVENTS = {
-    LIST: 'LIST_HERO',
-    SELECT: 'SELECT_HERO',
-    MODIFY: 'MODIFY_HERO'
+    LIST: 'LIST_HEROS',
+    GET_HERO: 'GET_HERO',
+    EDIT_HERO: 'EDIT_HERO'
   },
   _heroes = [],
   _hero = {
@@ -19,7 +19,8 @@ const URI = 'https://ce3rt0e0yl.execute-api.us-east-1.amazonaws.com/prod/abbHero
     'powers': '',
     'uuid': '',
     'heroName': '',
-    'signedAccords': ''
+    'signedAccords': '',
+    'groups': []
   };
 
 function defaultHero() { return Object.assign({}, _hero); }

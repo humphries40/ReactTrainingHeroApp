@@ -1,4 +1,4 @@
-import { defaultHero, defaultHeroes, EVENTS } from '../config/settings';
+import { defaultHero, defaultHeroes, EVENTS, URI } from '../config/settings';
 
 const initialState = {
   heroes: defaultHeroes(),
@@ -9,11 +9,11 @@ export default (state = initialState, action) => {
   const newState = Object.assign({}, state);
 
   switch (action.type) {
-    case "INIT":
+    case EVENTS.LIST:
       return Object.assign(newState, { heroes: action.heroes });
-    case "EDIT":
-      return Object.assign(newState, { heroes: updateHero(state, action.hero) });
-    case "GET":
+    case EVENTS.EDIT_HERO:
+      return Object.assign(newState, { hero: updateHero(state, action.hero) });
+    case EVENTS.GET_HERO:
       return Object.assign(newState, { hero: action.hero });
     default:
       return state;
@@ -21,19 +21,8 @@ export default (state = initialState, action) => {
 }
 
 function updateHero(state, hero) {
-  let oldUsers = state.heroes;
-  let returnValue = Object.assign([], oldUsers);
-
-  const newHero = {
-    name: hero.name,
-    email: hero.email
-  };
-
-  if (isNaN(hero.id)) {
-    returnValue.push(newHero);
-  } else {
-    returnValue[hero.id] = newHero;
-  }
-
-  return returnValue;
+  var request = new XMLHttpRequest();
+  request.open('POST', URI, true);
+  request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+  request.send(JSON.stringify(hero));
 }

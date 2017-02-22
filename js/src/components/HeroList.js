@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Table, Column, Cell } from 'fixed-data-table-2';
 import { Link } from 'react-router'
+import { URI, defaultHero } from '../config/settings'
 
 const ImageCell = ({rowIndex, data, col, ...props}) => (
   <img src={data[rowIndex][col]} height="100px" width="100px"
@@ -16,7 +17,7 @@ const TextCell = ({rowIndex, data, col, ...props}) => (
 
 const LinkCell = ({rowIndex, data, col, ...props}) => (
   <Cell {...props}>
-    <button onClick={props.getHero(data[rowIndex][col])}>More Info</button>
+    <Link to={`/hero/${data[rowIndex][col]}`}>MoreInfo</Link>
   </Cell>
 );
 
@@ -50,7 +51,7 @@ export default class HeroList extends React.Component {
       />
       <Column
         header={<Cell>Details</Cell>}
-        cell={<LinkCell data={dataList} col="uuid" getHero={this.props.getHero}/>}
+        cell={<LinkCell data={dataList} col="uuid" />}
         width={200}
       />
     </Table>);
