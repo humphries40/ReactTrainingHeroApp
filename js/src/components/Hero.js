@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { URI, EVENTS } from '../config/settings'
+import { HeroURI, EVENTS } from '../config/settings'
+import { Link } from 'react-router'
 
 export default class Hero extends React.Component {
   constructor(props) {
@@ -9,7 +10,7 @@ export default class Hero extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getState = this.getState.bind(this);
-
+    this.GroupTemplate = this.GroupTemplate.bind(this);
     this.state = this.getState(this.props)
   }
 
@@ -49,12 +50,28 @@ export default class Hero extends React.Component {
     this.setState(this.getState(nextProps));
   }
 
+  GroupTemplate(groups) {
+    let grouplist = [];
+
+    for (var i = 0; i < groups.length; i++) {
+      grouplist.push(<div className="col col-lg-2">
+        {/*<img src={groups[i].s3ImageUrl} />*/}
+      <Link to={`/group/${groups[i]}`}>{groups[i]}</Link>
+      </div>)
+    }
+    return (<div className="row">
+        {grouplist}
+      </div>
+    )
+  }
+
   render() {
-    return <div><h1>{this.state.heroName}</h1>
+    return <div>
       <div className="container">
         <form onSubmit={this.handleSubmit} className="form">
           <div className="form-group row">
-            <button type="submit" className="btn btn-primary">Update Hero</button>
+            <h1 className="pull-left">{this.state.heroName}</h1>
+            <button type="submit" className="btn btn-primary pull-right">Update Hero</button>
           </div>
           <div className="form-group row">
             <div className="col"><img src={this.state.s3ImageUrl} /></div>
@@ -81,7 +98,7 @@ export default class Hero extends React.Component {
               </div>
             </div>
             <div className="col col-lg-3">
-              <div className="form-check">
+              <div className="form-group">
                 <label htmlFor="signedAccords">Signed the Sokovia Accords</label>
                 <select className="form-control" onChange={this.handleChange} ref="signedAccords" id="signedAccords" value={this.state.signedAccords}>
                   <option>Yes</option>
@@ -94,7 +111,7 @@ export default class Hero extends React.Component {
             <div className="col-lg-12">
               <div className="form-group">
                 <label htmlFor="powers">Description of Powers</label>
-                <textarea className="form-control" onChange={this.handleChange} ref="powers" id="powers" value={this.state.powers} />
+                <textarea className="form-control" onChange={this.handleChange} ref="powers" id="powers" rows="7" value={this.state.powers} />
               </div>
             </div>
           </div>
@@ -136,11 +153,11 @@ export default class Hero extends React.Component {
                 <label htmlFor="strength">Strength</label>
                 <input type="number" className="form-control" onChange={this.handleChange} ref="strength" id="strength" value={this.state.abilities.strength} />
               </div>
-            </div>
+            </div>            
           </div>
+          {this.GroupTemplate(this.state.groups)}
         </form>
       </div>
-
     </div>;
   }
 }

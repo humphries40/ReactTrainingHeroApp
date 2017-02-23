@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Table, Column, Cell } from 'fixed-data-table-2';
 import { Link } from 'react-router'
-import { HeroURI, defaultHero } from '../config/settings'
+import { GroupURI, defaultGroup } from '../config/settings'
 
 const ImageCell = ({rowIndex, data, col, ...props}) => (
   <img src={data[rowIndex][col]} height="100px" width="100px"
@@ -17,31 +17,18 @@ const TextCell = ({rowIndex, data, col, ...props}) => (
 
 const LinkCell = ({rowIndex, data, col, ...props}) => (
   <Cell {...props}>
-    <Link to={`/hero/${data[rowIndex][col]}`}>More Info</Link>
+    <Link to={`/group/${data[rowIndex][col]}`}>More Info</Link>
   </Cell>
 );
 
-
-
-export default class HeroList extends React.Component {
+export default class GroupList extends React.Component {
   constructor(props) {
     super(props);
-    this.GroupTitle = this.GroupTitle.bind(this);
   }
-
-  GroupTitle(props) {
-  if (props.groupid != "") {
-    return <h1>These heroes are a part of {props.groupid}</h1>
-  }
-  return ""
-}
-
 
   render() {
-    let dataList = this.props.heroes;
-    return (<div>
-    {this.GroupTitle(this.props)}
-    <Table
+    let dataList = this.props.groups;
+    return (<Table
       rowHeight={100}
       rowsCount={dataList.length}
       width={1000}
@@ -53,13 +40,8 @@ export default class HeroList extends React.Component {
         width={100}
       />
       <Column
-        header={<Cell>Hero Name</Cell>}
-        cell={<TextCell data={dataList} col="heroName" />}
-        width={200}
-      />
-      <Column
-        header={<Cell>Real Name</Cell>}
-        cell={<TextCell data={dataList} col="realName" />}
+        header={<Cell>Group Name</Cell>}
+        cell={<TextCell data={dataList} col="name" />}
         width={200}
       />
       <Column
@@ -67,7 +49,6 @@ export default class HeroList extends React.Component {
         cell={<LinkCell data={dataList} col="uuid" />}
         width={200}
       />
-    </Table>
-    </div>);
+    </Table>);
   }
 }

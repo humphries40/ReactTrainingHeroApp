@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Hero from '../components/Hero';
-import { URI, defaultHero, EVENTS } from '../config/settings'
+import { HeroURI, defaultHero, EVENTS } from '../config/settings'
 
 class DetailContainer extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class DetailContainer extends React.Component {
   }
 
   componentDidMount() {
-    $.getJSON(URI, ((data) => this.init(data)));
+    $.getJSON(HeroURI, ((data) => this.init(data)));
   }
 
   updateHero(updatedHero) {
