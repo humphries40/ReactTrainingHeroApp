@@ -13,6 +13,28 @@ class ListContainer extends React.Component {
 
     init(list) {
         let {dispatch} = this.props;
+        // This can create a bunch of heroes locally if you want to test
+        // your list's speed. Going to the details pages of these heroes is currently broken.
+        // for (var i = 0; i < 100000; i++) {
+        //     let numberMan = {
+        //         'abilities': {
+        //             'fighting skills': 1,
+        //             'strength': 1,
+        //             'durability': 1,
+        //             'energy projection': 1,
+        //             'speed': 1,
+        //             'intelligence': 1
+        //         },
+        //         'realName': 'Man Number ' + i,
+        //         's3ImageUrl': '',
+        //         'powers': 'His power is in NUMBERS!',
+        //         'uuid': 'numberman'+i,
+        //         'heroName': 'NumberMan ' + i,
+        //         'signedAccords': 'yes',
+        //         'groups': []
+        //     }
+        //     list.push(numberMan);
+        // }
         dispatch({ type: EVENTS.LIST, heroes: list });
     }
 
